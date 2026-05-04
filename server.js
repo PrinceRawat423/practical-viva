@@ -10,12 +10,12 @@ app.use(express.json());
 app.use(cors());
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100;
+  max: 100
 });
 app.use(limiter);
-app.use("/api/auth", require("./routes/authRoutes"));
-app.use("/api/products", require("./routes/productRoutes"));
-app.use("/api/orders", require("./routes/orderRoutes"));
+app.use("/api/auth", require("./routes/authroutes"));
+app.use("/api/products", require("./routes/productroutes"));
+app.use("/api/orders", require("./routes/orderroutes"));
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("DB Connected"))
