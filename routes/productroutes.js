@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Product = require("../models/Product");
+const Product = require("../models/product");
 const auth = require("../middleware/auth");
 const role = require("../middleware/role");
 
@@ -20,8 +20,12 @@ router.delete("/:id", auth, role("admin"), async (req, res) => {
   res.send("Deleted");
 });
 router.get("/", async (req, res) => {
-  const products = await Product.find();
-  res.send(products);
+  try {
+    const products = await Product.find();
+    res.send(products);
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
 });
 
 module.exports = router;
